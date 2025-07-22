@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
   name: { type: String },
-  slug: { type: String, unique: true, lowercase: true },
+  slug: { type: String },
   category: { type: String },
-  images: [{ type: String }], // ✅ make it an array for multiple
-  quantity: { type: Number, min: 0 },
+  images: [{ type: String }],
+  quantity: { type: Number },
   originalPrice: { type: Number },
   discountedPrice: { type: Number },
   description: { type: String },
@@ -17,5 +17,12 @@ const productSchema = new mongoose.Schema({
   ],
 }, { timestamps: true });
 
-const Product = mongoose.model("Product", productSchema);
-export default Product;
+const cartSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId,  ref: "User" },
+  productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+  quantity: { type: Number, required: true, default: 1 },
+}, { timestamps: true });
+
+// Exporting both models
+export const Product = mongoose.model("Product", productSchema);
+export const Cart = mongoose.model("Cart", cartSchema);

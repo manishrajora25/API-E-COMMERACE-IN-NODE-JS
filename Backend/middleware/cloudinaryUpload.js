@@ -5,9 +5,9 @@ import cloudinary from "../config/cloudinary.js";
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "user_images", // cloudinary folder name
+    folder: "user_images", 
     allowed_formats: ["jpg", "png", "jpeg"],
-    public_id: (req, file) => `user-${Date.now()}`, // image name
+    public_id: (req, file) => `user-${Date.now()}`, 
   },
 });
 

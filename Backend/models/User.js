@@ -4,13 +4,11 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     // required: true,
-    trim: true,
   },
   email: {
     type: String,
     // required: true,
     // unique: true,
-    lowercase: true,
   },
 
   password: {
@@ -21,8 +19,8 @@ const userSchema = new mongoose.Schema({
 
 
   image: {
-    type: String, // This will store URL or local file path
-    default: "",  // Optional default
+    type: String, 
+    default: "", 
   },
 
   // wishlist: [
