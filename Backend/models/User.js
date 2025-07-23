@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   },
 
   password: {
-    type: Number,
+    type: String,
     // required: true,
     minlength: 6,
   },
@@ -20,27 +20,19 @@ const userSchema = new mongoose.Schema({
 
   image: {
     type: String, 
-    default: "", 
+  default: ""
   },
 
-  // wishlist: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "Product",
-  //   },
-  // ],
-  // cart: [
-  //   {
-  //     product: {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: "Product",
-  //     },
-  //     quantity: {
-  //       type: Number,
-  //       default: 1,
-  //     },
-  //   },
-  // ],
+  cart:[{
+    product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+    quantity: { type: Number, required: true, default: 1 },
+ } ],
+  wishlist:[{
+    product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+ } ]
+
+
+
 }, {
   timestamps: true,
 });

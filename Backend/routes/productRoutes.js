@@ -1,12 +1,15 @@
 import express from "express";
-
-import { createForm,cartForm } from "../controllers/productController.js";
-
-// import { upload } from "../middleware/cloudinaryUpload.js";
+import { createForm, cartForm, wishlistForm, getAllProducts, updateProduct, deleteProduct } from "../controllers/productController.js";
+import {checkAdmin} from "../middleware/checkToken.js"
+import { uploadCloud } from "../middleware/cloudinaryUpload.js";
 
 const router = express.Router();
 
-router.post("/add", createForm); // ✅ Middleware applied here
-router.post("/cart/:id", cartForm);
+router.post("/add", uploadCloud.single("image"), createForm); 
+router.get("/all", getAllProducts);
+router.post("/cart/:id",checkAdmin, cartForm);
+router.post("/wishlist/:id", wishlistForm);
+router.put("/update/:id", updateProduct);
+router.delete("/delete/:id", deleteProduct);
 
 export default router;  
