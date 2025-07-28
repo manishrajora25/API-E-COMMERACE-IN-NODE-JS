@@ -6,7 +6,7 @@ import { uploadCloud } from "../middleware/cloudinaryUpload.js";
 const router = express.Router();
 
 router.post("/add", uploadCloud.single("image"), createForm); 
-router.get("/all", getAllProducts);
+router.get("/all", getAllProducts );
 router.post("/cart/:id",checkAdmin, cartForm);
 router.post("/wishlist/:id", wishlistForm);
 router.put("/update/:id", updateProduct);
