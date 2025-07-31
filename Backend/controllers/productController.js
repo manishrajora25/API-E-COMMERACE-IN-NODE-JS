@@ -56,23 +56,16 @@ export async function getSingleProducts (req, res){
 
 export async function cartForm(req, res) {
   try {
-    const userId = req.body.userId;  
-        const productId = req.params.id; 
+    const userId = req.user.id; // ✅ from auth middleware
+    const productId = req.params.id;
+    console.log(userId , productId)
     const quantity = req.body.quantity || 1;
 
-    console.log(productId);
-    
-    console.log("User:", userId, "Product:", productId);
-
     const product = await Product.findById(productId);
-    if (!product) {
-      return res.status(404).json({ error: "Product not found" });
-    }
+    if (!product) return res.status(404).json({ error: "Product not found" });
 
     const user = await User.findById(userId).populate("cart.product");
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
+    if (!user) return res.status(404).json({ error: "User not found" });
 
     const existingItem = user.cart.find(
       (item) => item.product._id.toString() === productId
@@ -92,6 +85,7 @@ export async function cartForm(req, res) {
     res.status(500).json({ error: "Error updating cart", details: error.message });
   }
 }
+
 
 export async function wishlistForm(req, res) {
   try {
@@ -185,9 +179,10 @@ export async function deleteProduct(req, res) {
 
 
 export async function getCartData(req, res) {
+  console.log("first")
   try {
    const userId = req.User._id;
-
+console.log(userId)
    const user = await User.findById(userId).populate("cart.product");
 
    if (!user) {

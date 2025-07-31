@@ -9,10 +9,13 @@ import axios from 'axios';
 import Header from "../component/Header.jsx"
 import Footer from '../component/Footer.jsx';
 
+
 const SingleProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser]= useState(null);
+
 
 const navigate = useNavigate();
 const location = useLocation();
@@ -30,31 +33,59 @@ const location = useLocation();
       });
   }, [id]);
 
+
+  useEffect(() => {
+    async function fetchUser() {
+   try {
+     const response = await axios.get("http://localhost:3000/user/checkToken", // ✅ matches your GET route
+       { withCredentials: true }
+     );
+ 
+     if (!response.data?.User) {
+       throw new Error("User not found in token response");
+     }
+ console.log(response.data.User)
+     setCurrentUser(response.data.User);
+     const user = response.data?.User ;
+ 
+ if (!user || !user.id) {
+   throw new Error("User not found in token response");
+ }
+ 
+ setCurrentUser(user);
+ 
+   } catch (e) {
+     console.error("User fetch error:", e);
+     setCurrentUser(null);
+   }
+ }
+ 
+ 
+     fetchUser();
+   }, []);
+
+
+
+
   if (loading) return <div className="text-center mt-10">Loading...</div>;
   if (!product) return <div className="text-center mt-10 text-red-500">Product not found.</div>;
 
 
 
-
   const handleAddToCart = async () => {
-    const token = localStorage.getItem("token"); 
-  
-    if (!token) {
-      navigate("/login", {
-        state: { from: location.pathname, productToAdd: product }
-      });
+    if (!currentUser) {
+      navigate(`/login?refere=${encodeURIComponent(location.pathname)}`);
       return;
     }
   
     try {
       const res = await axios.post(
         `http://localhost:3000/product/cart/${id}`,
+        { quantity: 1 },
         {
-          productId: product._id,
-          quantity: 1
+          withCredentials: true, // ✅ Required for sending cookies
         }
       );
-  
       console.log("Added to cart:", res.data);
       navigate("/cart");
     } catch (error) {
@@ -62,8 +93,7 @@ const location = useLocation();
     }
   };
   
-
-
+ 
 
   return (
     <>

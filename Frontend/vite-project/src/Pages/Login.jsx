@@ -8,7 +8,6 @@ const Login = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
-    role: 'user',
   });
 
   const [error, setError] = useState('');
@@ -25,8 +24,10 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        'http://localhost:3000/user/login',
-        form
+        'http://localhost:3000/user/login',form,{
+          withCredentials: true,
+        }
+        
       );
 
       // Save token and redirect

@@ -38,20 +38,33 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../Pages/Home.css";
+import axios from 'axios';
 
 const Header = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    toast.success("Logout successful!",{
-      position: "top-right",
-      autoClose: 2000,
-      theme: "colored"
-    });
-    setTimeout(() => navigate('/login'), 3000);
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:3000/user/logout", {}, {
+        withCredentials: true
+      });
+  
+      localStorage.removeItem("token"); 
+  
+      toast.success("Logout successful", {
+        position: "top-right",
+        autoClose: 2000,
+        theme: "colored"
+      });
+  
+      setTimeout(() => navigate('/login'), 3000); 
+    } catch (error) {
+      console.error("Logout failed:", error);
+      toast.error("Logout failed");
+    }
   };
+  
 
   return (
     <>

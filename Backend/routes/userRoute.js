@@ -11,8 +11,8 @@ const router = express.Router();
 
 router.post("/login", loginUser); 
 router.post("/register", uploadCloud.single("image"), registerUser); 
-router.post("/checkToken", checkAdmin ,(req, res)=>{
-    res.json({user: res.user})
+router.get("/checkToken", checkAdmin ,(req, res)=>{
+    res.json({User: req.user})
 } ); 
 router.post("/logout", logoutUser);
 

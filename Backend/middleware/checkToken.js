@@ -3,21 +3,16 @@ import 'dotenv/config';
 // import admin from "../models/adminModel.js";
 
 
-export function checkAdmin(req, res, next) {
+export const checkAdmin = (req, res, next) => {
     const token = req.cookies.userToken;
-
-    if (!token ) return res.status(401).send({ message: "No Token Found" });
+    if (!token) return res.status(401).json({ message: "No Token Found" });
+  
     try {
-
-        const decoded = jwt.verify(token, process.env.jWT_SECRET);
-
-        req.user = decoded.id;
-
-        next();
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = decoded;
+      next();
+    } catch (err) {
+      res.status(401).json({ message: "Invalid Token" });
     }
-    catch (error) {
-        return res.status(402).json({ message: "Invalid or expired token" });
-    }
-}
-
-export default checkAdmin;
+  };
+  

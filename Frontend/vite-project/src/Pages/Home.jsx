@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
