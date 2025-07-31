@@ -1,14 +1,15 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { UserContextProvider } from '../component/useContext.jsx';
-
-    // import Login from './pages/Login';
-    // import Register from './pages/Register';
 import First from '../First.jsx'; 
 import Home from '../Pages/Home.jsx';
 import SingleProduct from '../Pages/SingleProduct.jsx';
-import Login from '../Pages/Login.jsx';
+import Login from './Pages/Login.jsx';
 import Register from '../Pages/Register.jsx'; 
+import Cart from '../Pages/Cart.jsx';
+import Wishlist from '../Pages/Wishlist.jsx';
+import ProtectedRoute from "../component/ProtectedRoute.jsx"; 
+
 
 const router = createBrowserRouter([
   {
@@ -29,8 +30,25 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/singleproduct/:id",
+        path: "singleproduct/:id",
         element: <SingleProduct />,
+      },
+
+      {
+        path: "/cart/:id", 
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/wishlist/:id", 
+        element: (
+          <ProtectedRoute>
+            <Wishlist />
+          </ProtectedRoute>
+        ),
       },
       
     ],

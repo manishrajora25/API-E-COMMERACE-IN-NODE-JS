@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import "../Pages/Home.css"
 
 const Register = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
     firstname: '',
-    lastname: '',
-    gender: '',
     email: '',
     password: '',
     role: 'user',
   });
-
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
     setForm({
@@ -28,16 +25,21 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        'http://localhost:3000/user/register',
-        form
-      );
-      setSuccess('Registration successful! Redirecting to login...');
-      
-      setTimeout(() => navigate('/login'), 2000);
+      await axios.post('http://localhost:3000/user/register', form);
+
+      toast.success('Registration successful! Redirecting to login...', {
+        position: "top-right",
+        autoClose: 2000,
+        theme: "colored"
+      });
+
+      setTimeout(() => navigate('/login'), 3000);
     } catch (err) {
-      console.error(err);
-      setError(err.response?.data?.message || 'Registration failed');
+      toast.error(err.response?.data?.message || 'Registration failed', {
+        position: "top-right",
+        autoClose: 2000,
+        theme: "colored"
+      });
     }
   };
 
@@ -49,9 +51,6 @@ const Register = () => {
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
 
-        {error && <p className="text-red-500 mb-3 text-sm">{error}</p>}
-        {success && <p className="text-green-500 mb-3 text-sm">{success}</p>}
-
         <div className="grid grid-cols-1 gap-4 mb-4">
           <div>
             <label className="block text-gray-700">Enter Name</label>
@@ -59,17 +58,13 @@ const Register = () => {
               type="text"
               name="firstname"
               value={form.firstname}
-              placeholder='Enter The Nmae'
+              placeholder="Enter Your Name"
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md"
             />
           </div>
-
-          
         </div>
-
-       
 
         <div className="mb-4">
           <label className="block text-gray-700">Email</label>
@@ -78,7 +73,7 @@ const Register = () => {
             name="email"
             value={form.email}
             onChange={handleChange}
-            placeholder='Enter Your Email'
+            placeholder="Enter Your Email"
             required
             className="w-full px-3 py-2 border rounded-md"
           />
@@ -91,7 +86,7 @@ const Register = () => {
             name="password"
             value={form.password}
             onChange={handleChange}
-            placeholder='Enter Your Password'
+            placeholder="Enter Your Password"
             required
             className="w-full px-3 py-2 border rounded-md"
           />

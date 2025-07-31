@@ -23,7 +23,7 @@ export async function createForm(req, res) {
 
 
 export async function getAllProducts(req, res) {
-  console.log("first");
+  // console.log("first");
   try {
     const products = await Product.find();
   
@@ -34,21 +34,19 @@ export async function getAllProducts(req, res) {
 }
 
 
+// productRoute.js
+export async function getSingleProducts (req, res){
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ message: "Product not found" });
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
 
-// export async function getSingleProduct(req, res) {
-//   try {
-//     const product = await Product.findById(req.params.id);
 
-//     if (!product) {
-//       return res.status(404).json({ error: "Product not found" });
-//     }
-
-//     res.status(200).json(product);
-//   } catch (err) {
-//     res.status(500).json({ error: "Failed to fetch product", details: err.message });
-//   }
-// }
 
 
 
@@ -181,4 +179,28 @@ export async function deleteProduct(req, res) {
   } catch (err) {
     res.status(500).json({ error: "Product deletion failed", details: err.message });
   }
+}
+
+
+
+
+export async function getCartData(req, res) {
+  try {
+   const userId = req.User._id;
+
+   const user = await User.findById(userId).populate("cart.product");
+
+   if (!user) {
+     return res.status(404).json({ message: "User not found" });
+   }
+
+   res.json({ cart: user.cart });
+ } catch (error) {
+   console.error("Cart fetch error:", error);
+   res.status(500).json({
+     message: "Server error",
+     error: error.message,
+   });
+ }
+
 }

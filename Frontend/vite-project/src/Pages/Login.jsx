@@ -37,7 +37,7 @@ const Login = () => {
         theme: "colored",
       });
 
-      navigate('/'); // redirect to home page
+      setTimeout(() => navigate('/'), 3000); 
     } catch (err) {
       console.error(err);
       toast.error(err.response?.data?.message || 'Login failed', {

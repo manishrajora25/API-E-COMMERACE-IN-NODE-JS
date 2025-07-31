@@ -11,6 +11,7 @@ const First = () => {
       <Header />
       <Outlet />
       <Footer />
+      
     </>
   );
 }
