@@ -328,12 +328,12 @@ const Header = () => {
             {token ? (
               <div onClick={handleLogout} className="flex items-center gap-2 text-red-600 cursor-pointer hover:text-red-800 transition-all duration-300 py-2 px-4 rounded-lg hover:bg-red-50 font-semibold group">
                 <span className="hidden sm:block">Logout</span>
-                <LuLogIn size={23} className="group-hover:scale-110 transition-transform duration-300" />
+                < LuLogOut size={23} className="group-hover:scale-110 transition-transform duration-300" />
               </div>
             ) : (
               <Link to="/login" className="flex items-center gap-2 text-green-600 hover:text-green-800 transition-all duration-300 py-2 px-4 rounded-lg hover:bg-green-50 font-semibold group">
                 <span className="hidden sm:block">Login</span>
-                <LuLogOut size={23} className="group-hover:scale-110 transition-transform duration-300" />
+                <LuLogIn size={23} className="group-hover:scale-110 transition-transform duration-300" />
               </Link>
             )}
           </li>

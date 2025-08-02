@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
-import Login from './pages/Login';
-import Register from './Pages/Register';
+import Login from './Pages/Login.jsx';
+import Register from './Pages/Register.jsx';
 import First from './First'; 
 import SingleProduct from './Pages/SingleProduct';
 import Cart from './Pages/Cart';
