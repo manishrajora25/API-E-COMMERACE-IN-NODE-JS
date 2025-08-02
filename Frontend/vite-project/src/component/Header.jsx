@@ -228,6 +228,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../Pages/Home.css";
 import axios from 'axios';
+import Instance from '../Axios.js';
 import { UserContext } from '../component/useContext';
 import { LuLogIn, LuLogOut } from "react-icons/lu";
 import { FaCartArrowDown, FaRegHeart } from 'react-icons/fa';
@@ -241,7 +242,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:3000/user/logout", {}, { withCredentials: true });
+      await Instance.post("/user/logout", {}, { withCredentials: true });
       localStorage.removeItem("token");
       toast.success("Logout successful", { position: "top-right", autoClose: 2000, theme: "colored" });
       setTimeout(() => navigate('/login'), 3000);
