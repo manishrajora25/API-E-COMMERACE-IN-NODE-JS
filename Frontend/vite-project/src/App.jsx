@@ -1,11 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
-import Login from '../pages/Login';
-import Register from '../Pages/Register';
+import Login from './pages/Login';
+import Register from './Pages/Register';
 import First from './First'; 
 import SingleProduct from './Pages/SingleProduct';
 import Cart from './Pages/Cart';
+import Wishlist from './Pages/Wishlist';
+import About from './Pages/About';
+import Contact from './Pages/Contact';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -21,6 +24,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="singleproduct/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        
+
         
 
         

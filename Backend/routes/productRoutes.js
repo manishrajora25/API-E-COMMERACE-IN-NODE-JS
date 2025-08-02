@@ -1,5 +1,5 @@
 import express from "express";
-import { createForm, cartForm, wishlistForm, getAllProducts, updateProduct, deleteProduct, getSingleProducts, getCartData } from "../controllers/productController.js";
+import { createForm, cartForm, wishlistForm, getAllProducts, updateProduct, getSingleProducts, getCartData, removeFromCart, wishlistData, removeFromWishlist } from "../controllers/productController.js";
 import {checkAdmin} from "../middleware/checkToken.js"
 import { uploadCloud } from "../middleware/cloudinaryUpload.js";
 
@@ -119,7 +119,8 @@ router.get("/all", getAllProducts);
  */
 router.get("/:id", getSingleProducts);
 
-router.post("/cart/:id",checkAdmin, cartForm);/**
+// router.post("/cart/:id",checkAdmin, cartForm);
+/**
 * @swagger
 * /api/product/cart/{id}:
 *   post:
@@ -153,7 +154,7 @@ router.post("/cart/:id",checkAdmin, cartForm);/**
 router.post("/cart/:id", checkAdmin, cartForm);
 
 
-router.get("/cart/data", checkAdmin, getCartData);/**
+/**
 * @swagger
 * /api/product/cart/data:
 *   get:
@@ -197,7 +198,56 @@ router.get("/cart/data", checkAdmin, getCartData);/**
 router.get("/cart/data", checkAdmin, getCartData);
 
 
-router.post("/wishlist/:id", wishlistForm);/**
+
+
+
+
+/**
+ * @swagger
+ * /wishlist/data:
+ *   get:
+ *     summary: Get the authenticated user's wishlist
+ *     description: Retrieve all products from the logged-in user's wishlist.
+ *     tags:
+ *       - Wishlist
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Wishlist fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 wishlist:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       product:
+ *                         type: object
+ *                         properties:
+ *                           _id:
+ *                             type: string
+ *                           name:
+ *                             type: string
+ *                           image:
+ *                             type: string
+ *                           originalPrice:
+ *                             type: number
+ *                           category:
+ *                             type: string
+ *       401:
+ *         description: Unauthorized - user not logged in
+ *       500:
+ *         description: Server error
+ */
+router.get("/wishlist/data", checkAdmin, wishlistData)
+
+
+
+/**
 * @swagger
 * /api/product/wishlist/{id}:
 *   post:
@@ -230,7 +280,9 @@ router.post("/wishlist/:id", wishlistForm);
 
 
 
-router.put("/update/:id", updateProduct);/**
+
+
+/**
 * @swagger
 * /api/product/update/{id}:
 *   put:
@@ -278,7 +330,10 @@ router.put("/update/:id", updateProduct);
 
 
 
-router.delete("/delete/:id", deleteProduct);/**
+
+
+// router.delete("/delete/:id", deleteProduct);
+/**
 * @swagger
 * /api/product/delete/{id}:
 *   delete:
@@ -305,7 +360,53 @@ router.delete("/delete/:id", deleteProduct);/**
 *       404:
 *         description: Product not found
 */
-router.delete("/delete/:id", deleteProduct);
+// router.delete("/delete/:id", deleteProduct);
+
+router.delete("/cart/:id", checkAdmin, removeFromCart);
+
+
+
+
+
+
+
+
+/**
+ * @swagger
+ * /wishlist/{id}:
+ *   delete:
+ *     summary: Remove a product from the user's wishlist
+ *     description: Deletes a product from the authenticated user's wishlist.
+ *     tags:
+ *       - Wishlist
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the product to remove from the wishlist
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Product successfully removed from wishlist
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Product removed from wishlist
+ *       401:
+ *         description: Unauthorized - user not logged in
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Server error
+ */
+router.delete("/wishlist/:id", checkAdmin, removeFromWishlist )
 
 
 export default router;  

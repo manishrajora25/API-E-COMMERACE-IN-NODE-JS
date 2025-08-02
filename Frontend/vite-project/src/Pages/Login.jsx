@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { FaEnvelope, FaLock } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -50,53 +51,65 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+  
+
+    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-50 to-purple-100 px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm"
+        className="bg-white p-6 rounded-xl shadow-2xl w-full max-w-sm border border-gray-200"
       >
-        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-
-        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
-
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">Login</h2>
+    
+        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
+    
         <div className="mb-4">
-          <label className="block text-gray-700">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            placeholder='Enter your Email'
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded-md focus:outline-none"
-          />
+          <label className="block text-sm font-semibold text-blue-600 mb-1">Email</label>
+          <div className="flex items-center border rounded-md px-3 py-2 bg-blue-50">
+            <FaEnvelope className="text-blue-400 mr-2" />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              placeholder="Enter your Email"
+              onChange={handleChange}
+              required
+              className="w-full bg-transparent outline-none"
+            />
+          </div>
         </div>
-
+    
         <div className="mb-4">
-          <label className="block text-gray-700">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            placeholder='Enter Your Password'
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded-md focus:outline-none"
-          />
+          <label className="block text-sm font-semibold text-blue-600 mb-1">Password</label>
+          <div className="flex items-center border rounded-md px-3 py-2 bg-blue-50">
+            <FaLock className="text-blue-400 mr-2" />
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              placeholder="Enter your Password"
+              onChange={handleChange}
+              required
+              className="w-full bg-transparent outline-none"
+            />
+          </div>
         </div>
-
+    
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-2 rounded-xl shadow-md transition-all duration-300"
         >
           Login
         </button>
-
-        <p className="text-center text-sm text-gray-600 mt-3">
-          Don't have an account? <a href="/register" className="text-blue-500 hover:underline">Register</a>
+    
+        <p className="text-center text-sm text-gray-600 mt-4">
+          Don't have an account?{" "}
+          <a href="/register" className="text-blue-500 hover:underline font-medium">
+            Register
+          </a>
         </p>
       </form>
     </div>
+    
   );
 };
 

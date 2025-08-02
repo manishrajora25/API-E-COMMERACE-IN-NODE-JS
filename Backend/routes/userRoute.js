@@ -130,7 +130,7 @@ router.get("/checkToken", checkAdmin, (req, res) => {
     res.json({ User: req.user });
   });
   
-router.post("/logout", logoutUser);/**
+/**
 * @swagger
 * /api/product/logout:
 *   post:

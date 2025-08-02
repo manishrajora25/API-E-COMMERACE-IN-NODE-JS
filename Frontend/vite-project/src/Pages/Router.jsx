@@ -8,7 +8,10 @@ import Login from './Pages/Login.jsx';
 import Register from '../Pages/Register.jsx'; 
 import Cart from '../Pages/Cart.jsx';
 import Wishlist from '../Pages/Wishlist.jsx';
-import ProtectedRoute from "../component/ProtectedRoute.jsx"; 
+import About from '../Pages/About.jsx';
+import Contact from '../Pages/Contact.jsx';
+// import ProtectedRoute from "../component/ProtectedRoute.jsx";
+import ProtectedRoute from "./component/ProtectedRoute";
 
 
 const router = createBrowserRouter([
@@ -32,6 +35,16 @@ const router = createBrowserRouter([
       {
         path: "singleproduct/:id",
         element: <SingleProduct />,
+      },
+
+      {
+        path: "about",
+        element: <About />,
+      },
+
+      {
+        path: "contact",
+        element: <Contact />,
       },
 
       {
