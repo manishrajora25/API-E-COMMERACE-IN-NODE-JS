@@ -15,10 +15,10 @@ const Wishlist = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (!currentUser) {
-      navigate(`/login?refere=${encodeURIComponent(location.pathname)}`);
-      return;
-    }
+    // if (!currentUser) {
+    //   navigate(`/login?refere=${encodeURIComponent(location.pathname)}`);
+    //   return;
+    // }
 
     const fetchWishlist = async () => {
       try {
