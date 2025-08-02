@@ -204,34 +204,6 @@ export const removeFromWishlist = async (req, res) => {
 };
 
 
-
-
-// export const removeFromWishlist = async (req, res) => {
-//   try {
-//     const userId = req.user.id;
-//     const productId = req.params.id;
-
-//     const user = await User.findById(userId);
-//     if (!user) return res.status(404).json({ message: "User not found" });
-
-//     user.wishlist = user.wishlist.filter(
-//       (item) => item.product.filter(item => item.product.toString() !== productId)
-//     );
-
-//     await user.save();
-
-//     res.status(200).json({ message: "Product removed from wishlist", wishlist: user.wishlist });
-//   } catch (error) {
-//     console.error("Remove wishlist error:", error);
-//     res.status(500).json({ message: "Server error", error: error.message });
-//   }
-// };
-
-
-
-
-
-
 export async function getCartData(req, res) {
   console.log("rishi")
   try {
