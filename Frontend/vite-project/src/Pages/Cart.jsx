@@ -1,11 +1,10 @@
-
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from "../component/Header"
 import Footer from "../component/Footer"
 import { MdDelete } from "react-icons/md";
 import { toast } from 'react-toastify';
+import Instance from '../Axios.js';
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -21,7 +20,7 @@ const Cart = () => {
     async function fetchUser() {
         
    try {
-     const response = await axios.get("http://localhost:3000/user/checkToken", // ✅ matches your GET route
+     const response = await Instance.get("/user/checkToken", // ✅ matches your GET route
        { withCredentials: true }
      );
  
@@ -68,7 +67,7 @@ const Cart = () => {
       }
       console.log("jhcb")
     try {
-      const res = await axios.get('http://localhost:3000/product/cart/data', {
+      const res = await Instance.get('/product/cart/data', {
         withCredentials: true, // ✅ Required to send the cookie
       });
    console.log(res.data)
@@ -92,8 +91,8 @@ const Cart = () => {
 
   const handleRemove = async (productId) => {
     try {
-      const res = await axios.delete(
-        `http://localhost:3000/product/cart/${productId}`,
+      const res = await Instance.delete(
+        `/product/cart/${productId}`,
         { withCredentials: true }
       );
       console.log("Removed from cart:", res.data);

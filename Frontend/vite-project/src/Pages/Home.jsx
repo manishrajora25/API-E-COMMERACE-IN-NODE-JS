@@ -1,11 +1,7 @@
 import React from 'react'
 import "../Pages/Home.css"
 import { Link } from 'react-router-dom';
-// adjust path if needed
-
-
-
-import axios from "axios";
+import Instance from '../Axios.js';
 import { useEffect, useState } from "react";
 
 
@@ -16,10 +12,9 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/product/all");
+        const response = await Instance.get("/product/all"); // ✅ Instance used
         setProducts(response.data);
         console.log(response.data);
-        
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -27,7 +22,6 @@ const Home = () => {
 
     fetchData();
   }, []);
-
   return (
     <>
     

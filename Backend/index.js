@@ -16,7 +16,7 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: "https://api-e-commerace-in-node-js-1.onrender.com",
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

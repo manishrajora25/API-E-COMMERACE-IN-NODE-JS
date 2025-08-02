@@ -1,11 +1,9 @@
-// src/Pages/SingleProduct.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
 import Instance from "../Axios.js";
 import "../Pages/Home.css";
-import axios from "axios";
 import Header from "../component/Header.jsx";
 import Footer from "../component/Footer.jsx";
 import { toast } from "react-toastify";
@@ -20,8 +18,8 @@ const SingleProduct = () => {
   const location = useLocation();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/product/${id}`)
+    Instance
+      .get(`/product/${id}`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);
@@ -35,8 +33,8 @@ const SingleProduct = () => {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/user/checkToken", // ✅ matches your GET route
+        const response = await Instance.get(
+          "/user/checkToken", // ✅ matches your GET route
           { withCredentials: true }
         );
 
@@ -74,8 +72,8 @@ const SingleProduct = () => {
     }
 
     try {
-      const res = await axios.post(
-        `http://localhost:3000/product/cart/${id}`,
+      const res = await Instance.post(
+        `/product/cart/${id}`,
         { quantity: 1 },
         {
           withCredentials: true, // ✅ Required for sending cookies
@@ -109,8 +107,8 @@ const SingleProduct = () => {
     }
 
     try {
-      const res = await axios.post(
-        `http://localhost:3000/product/wishlist/${id}`,
+      const res = await Instance.post(
+        `/product/wishlist/${id}`,
         { userId: currentUser.id }, // ✅ Pass userId in body
         { withCredentials: true }
       );

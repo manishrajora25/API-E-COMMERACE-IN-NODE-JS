@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import Instance from '../Axios.js';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaEnvelope, FaLock } from "react-icons/fa";
@@ -24,8 +24,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        'http://localhost:3000/user/login',form,{
+      const res = await Instance.post("/user/login",form,{
           withCredentials: true,
         }
         

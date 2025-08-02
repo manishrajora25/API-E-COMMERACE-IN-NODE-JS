@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import Instance from '../Axios.js';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaUserAlt, FaLock, FaEnvelope } from "react-icons/fa";
@@ -26,7 +26,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:3000/user/register', form);
+      await Instance.post('/user/register', form);
 
       toast.success('Registration successful! Redirecting to login...', {
         position: "top-right",

@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const Instance = axios.create({
-  baseURL: "https://api-e-commerace-in-node-js.onrender.com", // ✅ remove `/all`
+  baseURL: "http://localhost:3000", 
 });
 
 export default Instance;

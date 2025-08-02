@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import Instance from '../Axios.js';
 import { UserContext } from '../component/useContext';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
@@ -22,7 +22,7 @@ const Wishlist = () => {
 
     const fetchWishlist = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/product/wishlist/data', {
+        const res = await Instance.get('/product/wishlist/data', {
           withCredentials: true,
         });
         setWishlist(res.data?.wishlist || []);
@@ -41,8 +41,8 @@ const Wishlist = () => {
 
   const handleRemove = async (productId) => {
     try {
-      const res = await axios.delete(
-        `http://localhost:3000/product/wishlist/${productId}`,
+      const res = await Instance.delete(
+        `/product/wishlist/${productId}`,
         { withCredentials: true }
       );
       console.log("Removed from wishlist:", res.data);
