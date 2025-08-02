@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Pages/Home';
+import Home from './Pages/Home.jsx';
 import Login from './Pages/Login.jsx';
 import Register from './Pages/Register.jsx';
-import First from './First'; 
-import SingleProduct from './Pages/SingleProduct';
-import Cart from './Pages/Cart';
-import Wishlist from './Pages/Wishlist';
-import About from './Pages/About';
-import Contact from './Pages/Contact';
+import First from './First.jsx'; 
+import SingleProduct from './Pages/SingleProduct.jsx';
+import Cart from './Pages/Cart.jsx';
+import Wishlist from './Pages/Wishlist.jsx';
+import About from './Pages/About.jsx';
+import Contact from './Pages/Contact.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
