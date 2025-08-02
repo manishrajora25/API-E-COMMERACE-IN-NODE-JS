@@ -30,7 +30,6 @@ const Login = () => {
         
       );
 
-      // Save token and redirect
       localStorage.setItem('token', res.data.token);
        toast.success('Login successful!', {
         position: "top-right",

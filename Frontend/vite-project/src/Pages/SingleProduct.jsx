@@ -34,7 +34,7 @@ const SingleProduct = () => {
     async function fetchUser() {
       try {
         const response = await Instance.get(
-          "/user/checkToken", // ✅ matches your GET route
+          "/user/checkToken", 
           { withCredentials: true }
         );
 
@@ -76,7 +76,7 @@ const SingleProduct = () => {
         `/product/cart/${id}`,
         { quantity: 1 },
         {
-          withCredentials: true, // ✅ Required for sending cookies
+          withCredentials: true, 
         }
       );
       console.log("Added to cart:", res.data);

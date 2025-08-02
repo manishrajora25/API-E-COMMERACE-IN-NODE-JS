@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Instance.get("/product/all"); // ✅ Instance used
+        const response = await Instance.get("/product/all"); 
         setProducts(response.data);
         console.log(response.data);
       } catch (error) {

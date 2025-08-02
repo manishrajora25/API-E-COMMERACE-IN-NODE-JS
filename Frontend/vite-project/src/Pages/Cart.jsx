@@ -20,7 +20,7 @@ const Cart = () => {
     async function fetchUser() {
         
    try {
-     const response = await Instance.get("/user/checkToken", // ✅ matches your GET route
+     const response = await Instance.get("/user/checkToken",
        { withCredentials: true }
      );
  
