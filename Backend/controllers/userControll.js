@@ -37,14 +37,13 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// ✅ LOGIN USER
+
 export const loginUser = async (req, res) => {
-  // console.log("first");
   try {
     const { email, password } = req.body;
     console.log(email, password);
 
-    // ✅ FIXED: only search by email
+
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
 
@@ -67,7 +66,7 @@ export const loginUser = async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: "none",
-        maxAge: 3600000, // 1 hour in ms (✅ should be a number, not string)
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .send({
         message: "User Login Successfully",
@@ -82,17 +81,16 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// controllers/userControll.js
+
 export const logoutUser = async (req, res) => {
-  // console.log(res.clearCookie());
+  
   try {
-    // If you're using cookies:
     res.clearCookie(`userToken`, {
       httpOnly: true,
       secure: true,
       sameSite: "none",
       path: "/",
-    }); // optional, if using cookies
+    });
 
     res.status(200).json({ message: "Logout successful" });
   } catch (error) {

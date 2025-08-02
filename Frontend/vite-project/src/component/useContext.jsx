@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import Instance from '../Axios.js';
 
 export const UserContext = createContext();
 
@@ -12,8 +13,8 @@ export const UserContextProvider = ({ children }) => {
   
   const handleAddToCart = async (product) => {
     try {
-      const res = await axios.post(
-        `http://localhost:3000/product/cart/${product._id}`,
+      const res = await Instance.post(
+        `/product/cart/${product._id}`,
         {}, 
         { withCredentials: true }
       );
@@ -27,7 +28,7 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/user/checkToken", {
+        const response = await Instance.get("/user/checkToken", {
           withCredentials: true,
         });
 

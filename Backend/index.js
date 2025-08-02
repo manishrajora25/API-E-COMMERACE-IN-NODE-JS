@@ -7,6 +7,7 @@ import UserRoute from "./routes/userRoute.js";
 import cookieParser from "cookie-parser"
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./server/Server.js";
+
 import "dotenv/config";
 
 dotenv.config();
@@ -29,7 +30,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec) )
 
 app.use("/product",productRoute );
 app.use("/user",UserRoute );
-app.use("/uploads", express.static("uploads"));
+// app.use("/uploads", express.static("uploads"));
 
 
 connectDB();
