@@ -9,6 +9,7 @@ import Cart from './Pages/Cart.jsx';
 import Wishlist from './Pages/Wishlist.jsx';
 import About from './Pages/About.jsx';
 import Contact from './Pages/Contact.jsx';
+import AddProduct  from "./Pages/AddProductModal.jsx"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/addproduct" element={<AddProduct />} />
         
 
         

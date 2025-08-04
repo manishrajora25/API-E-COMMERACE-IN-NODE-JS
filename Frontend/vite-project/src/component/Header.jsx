@@ -232,18 +232,24 @@ import { UserContext } from '../component/useContext';
 import { LuLogIn, LuLogOut } from "react-icons/lu";
 import { FaCartArrowDown, FaRegHeart } from 'react-icons/fa';
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
+import { FiPlus } from "react-icons/fi";
+
+
+
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { cart = [], wishlist = [] } = useContext(UserContext);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const [showModal, setShowModal] = useState(false);
 
   const handleLogout = async () => {
     try {
       await Instance.post("/user/logout", {}, { withCredentials: true });
-      localStorage.removeItem("token");
-      toast.success("Logout successful", { position: "top-right", autoClose: 2000, theme: "colored" });
+      // localStorage.removeItem("token");
+      toast.success("Logout successful",
+      { position: "top-right", autoClose: 2000, theme: "colored" });
       setTimeout(() => navigate('/login'), 3000);
     } catch (error) {
       console.error("Logout failed:", error);
@@ -288,6 +294,19 @@ const Header = () => {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
             </Link>
           </li>
+
+          <li className="relative group">
+
+  <Link to="/addproduct"
+    className="flex items-center gap-2 text-green-700 hover:text-blue-600 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-blue-50"
+  >
+    <FiPlus className="text-xl" onClick={() => setShowModal(true)} />
+    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+  </Link>
+</li>
+{showModal && <AddProductModal onClose={() => setShowModal(false)} />}
+
+
 
           {/* Cart */}
           <li className="relative group">

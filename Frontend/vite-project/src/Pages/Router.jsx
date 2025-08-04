@@ -10,6 +10,7 @@ import Cart from '../Pages/Cart.jsx';
 import Wishlist from '../Pages/Wishlist.jsx';
 import About from '../Pages/About.jsx';
 import Contact from '../Pages/Contact.jsx';
+import AddProduct  from "../Pages/AddProductModal.jsx"
 // import ProtectedRoute from "../component/ProtectedRoute.jsx";
 import ProtectedRoute from "./component/ProtectedRoute";
 
@@ -45,6 +46,11 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+
+      {
+        path: "/addproduct",
+        element: <AddProduct />,
       },
 
       {

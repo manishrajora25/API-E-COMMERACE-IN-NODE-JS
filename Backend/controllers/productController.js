@@ -1,16 +1,54 @@
 import { Product} from "../models/Product.js";
 import User from "../models/User.js";
 
+// export async function createForm(req, res) {
+//   try {
+//     const imageUrl = req.file ? req.file.path : "";
+
+//     const newProduct = new Product({
+//       ...req.body,
+//       image: imageUrl, 
+//     });
+
+//     const savedProduct = await newProduct.save();
+//     res.status(201).json({
+//       message: "Product created successfully",
+//       product: savedProduct,
+//     });
+//   } catch (err) {
+//     console.error("Product Error:", err);
+//     res.status(500).json({ error: "Product creation failed", details: err.message });
+//   }
+// }
+
 export async function createForm(req, res) {
   try {
     const imageUrl = req.file ? req.file.path : "";
 
+    // Parse attributes field if it's a string
+    let attributes = [];
+    if (req.body.attributes) {
+      try {
+        attributes = JSON.parse(req.body.attributes);
+      } catch (err) {
+        return res.status(400).json({ error: "Invalid attributes format" });
+      }
+    }
+
     const newProduct = new Product({
-      ...req.body,
-      image: imageUrl, 
+      name: req.body.name,
+      slug: req.body.slug,
+      category: req.body.category,
+      quantity: req.body.quantity,
+      originalPrice: req.body.originalPrice,
+      discountedPrice: req.body.discountedPrice,
+      description: req.body.description,
+      image: imageUrl,
+      attributes, // parsed array
     });
 
     const savedProduct = await newProduct.save();
+
     res.status(201).json({
       message: "Product created successfully",
       product: savedProduct,
@@ -20,6 +58,7 @@ export async function createForm(req, res) {
     res.status(500).json({ error: "Product creation failed", details: err.message });
   }
 }
+
 
 
 export async function getAllProducts(req, res) {
