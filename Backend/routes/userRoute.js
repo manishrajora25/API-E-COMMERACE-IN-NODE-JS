@@ -127,6 +127,7 @@ router.post("/register", uploadCloud.single("image"), registerUser);
  *         description: Unauthorized - Invalid or missing token
  */
 router.get("/checkToken", checkAdmin, (req, res) => {
+  console.log("hello sir")
     res.json({ User: req.user });
   });
   

@@ -257,12 +257,18 @@ const Header = () => {
         {/* Logo */}
         <div className="flex items-center">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-2 rounded-lg mr-3 shadow-md">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-            </svg>
+          <svg
+  className="w-6 h-6 text-yellow-500"
+  fill="currentColor"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d="M12 2C10.895 2 10 2.895 10 4V5.586L7.707 7.879A1 1 0 007 8.586V10a1 1 0 001 1h1v4l-2.293 2.293A1 1 0 006 18.414V20a1 1 0 001 1h10a1 1 0 001-1v-1.586a1 1 0 00-.293-.707L16 15v-4h1a1 1 0 001-1V8.586a1 1 0 00-.293-.707L14 5.586V4c0-1.105-.895-2-2-2zm0 2c.552 0 1 .448 1 1v1.414a1 1 0 00.293.707L16.586 8H7.414l3.293-3.293A1 1 0 0011 5.414V4c0-.552.448-1 1-1zM10 12h4v3.586l2 2V19H8v-1.414l2-2V12z" />
+</svg>
+
           </div>
           <h2 className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-purple-600 hover:to-blue-600 transition-all duration-300">
-            E-COMMERCE
+            Jewellery-Ecom...
           </h2>
         </div>
 

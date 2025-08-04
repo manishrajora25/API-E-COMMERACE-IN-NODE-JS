@@ -30,7 +30,7 @@ const Login = () => {
         
       );
 
-      localStorage.setItem('token', res.data.token);
+      // localStorage.setItem('token', res.data.token);
        toast.success('Login successful!', {
         position: "top-right",
         autoClose: 2000,

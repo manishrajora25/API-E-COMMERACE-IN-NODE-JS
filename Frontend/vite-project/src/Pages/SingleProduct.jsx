@@ -41,8 +41,8 @@ const SingleProduct = () => {
         if (!response.data?.User) {
           throw new Error("User not found in token response");
         }
-        console.log(response.data.User);
-        setCurrentUser(response.data.User);
+        // console.log(response.data.User);
+        // setCurrentUser(response.data.User);
         const user = response.data?.User;
 
         if (!user || !user.id) {
@@ -85,7 +85,7 @@ const SingleProduct = () => {
         autoClose: 2000,
         theme: "colored",
       });
-      // navigate("/cart");
+
       setTimeout(() => navigate("/cart"), 3000);
     } catch (error) {
       console.error(
