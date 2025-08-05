@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
@@ -7,16 +7,18 @@ import "../Pages/Home.css";
 import Header from "../component/Header.jsx";
 import Footer from "../component/Footer.jsx";
 import { toast } from "react-toastify";
+import { UserContext } from "../component/useContext.jsx";
 
 const SingleProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null);
-
+const {user}=useContext(UserContext)
   const navigate = useNavigate();
   const location = useLocation();
 
+console.log(user)
+ 
   useEffect(() => {
     Instance
       .get(`/product/${id}`)
@@ -30,34 +32,7 @@ const SingleProduct = () => {
       });
   }, [id]);
 
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await Instance.get(
-          "/user/checkToken", 
-          { withCredentials: true }
-        );
-
-        if (!response.data?.User) {
-          throw new Error("User not found in token response");
-        }
-        // console.log(response.data.User);
-        // setCurrentUser(response.data.User);
-        const user = response.data?.User;
-
-        if (!user || !user.id) {
-          throw new Error("User not found in token response");
-        }
-
-        setCurrentUser(user);
-      } catch (e) {
-        console.error("User fetch error:", e);
-        setCurrentUser(null);
-      }
-    }
-
-    fetchUser();
-  }, []);
+ 
 
   if (loading) return <div className="text-center mt-10">Loading...</div>;
   if (!product)
@@ -66,9 +41,10 @@ const SingleProduct = () => {
     );
 
   const handleAddToCart = async () => {
-    if (!currentUser) {
+   
+    if (!user) {
       navigate(`/login?refere=${encodeURIComponent(location.pathname)}`);
-      return;
+      
     }
 
     try {
@@ -86,22 +62,18 @@ const SingleProduct = () => {
         theme: "colored",
       });
 
-      setTimeout(() => navigate("/cart"), 3000);
+       navigate("/cart")
     } catch (error) {
       console.error(
         "Error adding to cart:",
         error.response?.data || error.message
       );
-      toast.error("Cart not add", {
-        position: "top-right",
-        autoClose: 2000,
-        theme: "colored",
-      });
+      
     }
   };
 
   const handleAddToWishlist = async () => {
-    if (!currentUser) {
+    if (!user) {
       navigate(`/login?refere=${encodeURIComponent(location.pathname)}`);
       return;
     }
@@ -109,7 +81,7 @@ const SingleProduct = () => {
     try {
       const res = await Instance.post(
         `/product/wishlist/${id}`,
-        { userId: currentUser.id }, // ✅ Pass userId in body
+        { userId: user.id }, // ✅ Pass userId in body
         { withCredentials: true }
       );
       console.log("Wishlist response:", res.data);

@@ -10,6 +10,7 @@ export const checkAdmin = (req, res, next) => {
   // console.log(token)
       const decoded = jwt.verify(token, process.env.jWT_SECRET);
       req.user = decoded;
+      // req.role = decoded;
       console.log( decoded)
       next();
     } catch (err) {

@@ -88,7 +88,7 @@ export async function cartForm(req, res) {
   try {
     const userId = req.user.id; 
     const productId = req.params.id;
-    console.log(userId , productId)
+    console.log(userId , productId ,"hello")
     const quantity = req.body.quantity || 1;
 
     const product = await Product.findById(productId);

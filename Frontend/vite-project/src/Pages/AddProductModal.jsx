@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import Instance from '../Axios.js';
 
+
 const AddProductModal = ({ close }) => {
   const [form, setForm] = useState({
     name: '',

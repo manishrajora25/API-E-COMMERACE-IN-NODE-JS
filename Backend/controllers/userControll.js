@@ -2,7 +2,6 @@ import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-
 export const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -37,12 +36,10 @@ export const registerUser = async (req, res) => {
   }
 };
 
-
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log(email, password);
-
 
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -62,11 +59,11 @@ export const loginUser = async (req, res) => {
     );
 
     res
-      .cookie("userToken",userToken, {
+      .cookie("userToken", userToken, {
         httpOnly: true,
-        secure:true,
-        sameSite: "None",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        secure: true, // true if you're using HTTPS in production
+        sameSite: "strict",
+        maxAge: 60 * 60 * 1000, // ✅ 1 hour in milliseconds
       })
       .send({
         message: "User Login Successfully",
@@ -81,14 +78,12 @@ export const loginUser = async (req, res) => {
   }
 };
 
-
 export const logoutUser = async (req, res) => {
-  
   try {
-    res.clearCookie(`userToken`, userToken, {
+    res.clearCookie("userToken", {
       httpOnly: true,
-      secure:true,
-      sameSite: "none",
+      secure: true,
+      sameSite: "strict",
     });
 
     res.status(200).json({ message: "Logout successful" });

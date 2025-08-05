@@ -1,27 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "../Pages/Home.css"
 import { Link } from 'react-router-dom';
 import Instance from '../Axios.js';
 import { useEffect, useState } from "react";
+import { UserContext } from '../component/useContext.jsx';
 
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-  
+   
+const {products}=useContext(UserContext)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await Instance.get("/product/all"); 
-        setProducts(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
   return (
     <>
     
