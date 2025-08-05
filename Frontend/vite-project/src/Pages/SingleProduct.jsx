@@ -62,7 +62,8 @@ console.log(user)
         theme: "colored",
       });
 
-       navigate("/cart")
+      //  navigate("/cart")
+       setTimeout(() => navigate("/cart"), 3000);
     } catch (error) {
       console.error(
         "Error adding to cart:",
