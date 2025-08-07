@@ -1,16 +1,68 @@
+// import express from "express";
+// import cors from "cors";
+// import dotenv from "dotenv";
+// import connectDB from "./config/db.js";
+// import productRoute from "./routes/productRoutes.js";
+// import UserRoute from "./routes/userRoute.js";
+// import cookieParser from "cookie-parser"
+// import swaggerUi from "swagger-ui-express";
+// import swaggerSpec from "./server/Server.js";
+
+// import orderRoutes from "./routes/orderRoute.js";
+
+// import "dotenv/config";
+
+// dotenv.config();
+
+// const app = express();
+// const port = process.env.PORT;
+
+
+// app.use(
+//   cors({
+//     origin: process.env.FRONTEND_URL,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true })); 
+// app.use(cookieParser());
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec) )
+
+// app.use("/product",productRoute );
+// app.use("/user",UserRoute );
+// // app.use("/uploads", express.static("uploads"));
+
+// app.use("/order", orderRoutes);
+// // app.use("/address", addressRoutes);
+
+
+// connectDB();
+// app.listen(port, () => {
+//   console.log(`Server running at port ${port}`);
+// });
+
+
+
+
+
+
+
+
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import productRoute from "./routes/productRoutes.js";
 import UserRoute from "./routes/userRoute.js";
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./server/Server.js";
-
 import orderRoutes from "./routes/orderRoute.js";
-
-
+// import addressRoutes from "./routes/addressRoute.js"; // Uncomment when ready
 
 import "dotenv/config";
 
@@ -19,37 +71,39 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
 
+const allowedOrigins = [process.env.DEPLOYED_FRONTEND_URL];
+
+const localhostRegex = /^(https:\/\/localhost:\d+|http:\/\/localhost:\d+)$/;
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin) || localhostRegex.test(origin)) {
+      return callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec) )
 
-app.use("/product",productRoute );
-app.use("/user",UserRoute );
-// app.use("/uploads", express.static("uploads"));
+// Swagger setup
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// Routes
+app.use("/product", productRoute);
+app.use("/user", UserRoute);
 app.use("/order", orderRoutes);
-// app.use("/address", addressRoutes);
+// app.use("/address", addressRoutes); // Uncomment when route is created
 
-
+// Connect DB and start server
 connectDB();
 app.listen(port, () => {
   console.log(`Server running at port ${port}`);
 });
-
-
-
-
-
-
-
-
-
