@@ -70,6 +70,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
+connectDB();
 
 
 const allowedOrigins = [process.env.DEPLOYED_FRONTEND_URL];
@@ -103,7 +104,6 @@ app.use("/order", orderRoutes);
 // app.use("/address", addressRoutes); // Uncomment when route is created
 
 // Connect DB and start server
-connectDB();
 app.listen(port, () => {
   console.log(`Server running at port ${port}`);
 });
