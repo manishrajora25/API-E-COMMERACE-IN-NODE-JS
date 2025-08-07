@@ -175,6 +175,36 @@ export const wishlistData = async (req, res) => {
 
 
 
+// export async function updateProduct(req, res) {
+//   try {
+//     const { id } = req.params;
+
+//     const imageUrl = req.file ? req.file.path : undefined;
+
+//     const updateData = {
+//       ...req.body,
+//     };
+
+ 
+//     if (imageUrl) {
+//       updateData.images = [imageUrl];
+//     }
+
+//     const updatedProduct = await Product.findByIdAndUpdate(id, updateData, {
+//       new: true,
+//     });
+
+//     if (!updatedProduct) {
+//       return res.status(404).json({ message: "Product not found" });
+//     }
+
+//     res.status(200).json(updatedProduct);
+//   } catch (err) {
+//     res.status(500).json({ error: "Product update failed", details: err.message });
+//   }
+// }
+
+
 export async function updateProduct(req, res) {
   try {
     const { id } = req.params;
@@ -185,9 +215,8 @@ export async function updateProduct(req, res) {
       ...req.body,
     };
 
- 
     if (imageUrl) {
-      updateData.images = [imageUrl];
+      updateData.image = imageUrl; // ✅ correct field name
     }
 
     const updatedProduct = await Product.findByIdAndUpdate(id, updateData, {
@@ -198,11 +227,18 @@ export async function updateProduct(req, res) {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    res.status(200).json(updatedProduct);
+    res.status(200).json({
+      message: "Product updated successfully",
+      updatedProduct,
+    });
   } catch (err) {
-    res.status(500).json({ error: "Product update failed", details: err.message });
+    res.status(500).json({
+      error: "Product update failed",
+      details: err.message,
+    });
   }
 }
+
 
 
 export const removeFromCart = async (req, res) => {
@@ -268,4 +304,24 @@ console.log(userId)
 
 
 
+ export async  function deleteProduct (req, res) {
+  const { id } = req.params;
+  
 
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(id);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ message: "Product not found." });
+    }
+
+    res.status(200).json({ message: "Product deleted successfully." });
+  } catch (error) {
+    console.error("Delete error:", error);
+    res.status(500).json({ message: "Failed to delete product." });
+  }
+};
+
+// module.exports = {
+//   deleteProduct,
+// };

@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
     product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
  } ],
 
+role:{ type: String, default: "User", enum: ["User", "admin"]},
 
 
 }, {

@@ -13,6 +13,11 @@ import AddProduct  from "./Pages/AddProductModal.jsx"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
+// import ThankYou from './Pages/ThankYou.jsx';
+import AddressForm from '../src/Pages/AddressForm.jsx';
+import PaymentPage from '../src/Pages/PaymentPage.jsx';
+
 function App() {
   return (
     <BrowserRouter>
@@ -32,7 +37,9 @@ function App() {
         
 
         
-
+        {/* <Route path="/thankyou" element={<ThankYou />} /> */}
+        <Route path="/AddressForm" element={<AddressForm />} />
+        <Route path="/PaymentPage" element={<PaymentPage />} />
         
       </Routes>
 

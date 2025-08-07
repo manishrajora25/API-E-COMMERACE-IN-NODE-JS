@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password,role } = req.body;
     const imageUrl = req.file ? req.file.path : "";
     console.log("BODY:", req.body);
     console.log("FILE:", req.file);
@@ -22,6 +22,7 @@ export const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
       image: imageUrl,
+      role: role === "admin" ? "admin" : "User",
     });
 
     await newUser.save();
@@ -53,6 +54,7 @@ export const loginUser = async (req, res) => {
       {
         id: user._id,
         email: user.email,
+        role: user.role,
       },
       process.env.jWT_SECRET,
       { expiresIn: "1h" }
@@ -70,6 +72,7 @@ export const loginUser = async (req, res) => {
         user: {
           id: user._id,
           email: user.email,
+          role: user.role,
         },
       });
   } catch (err) {

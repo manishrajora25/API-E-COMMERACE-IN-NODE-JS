@@ -1,5 +1,5 @@
 import express from "express";
-import { createForm, cartForm, wishlistForm, getAllProducts, updateProduct, getSingleProducts, getCartData, removeFromCart, wishlistData, removeFromWishlist } from "../controllers/productController.js";
+import { createForm, cartForm, wishlistForm, getAllProducts, updateProduct, getSingleProducts, getCartData, removeFromCart, wishlistData, removeFromWishlist, deleteProduct } from "../controllers/productController.js";
 import {checkAdmin} from "../middleware/checkToken.js"
 import { uploadCloud } from "../middleware/cloudinaryUpload.js";
 
@@ -326,7 +326,7 @@ router.post("/wishlist/:id", wishlistForm);
 *       404:
 *         description: Product not found
 */
-router.put("/update/:id", updateProduct);
+router.put("/update/:id",  updateProduct);
 
 
 
@@ -407,6 +407,8 @@ router.delete("/cart/:id", checkAdmin, removeFromCart);
  *         description: Server error
  */
 router.delete("/wishlist/:id", checkAdmin, removeFromWishlist )
+
+router.delete("/:id", checkAdmin, deleteProduct);
 
 
 export default router;  

@@ -151,8 +151,10 @@ const Login = () => {
         withCredentials: true,
       });
 
-      localStorage.setItem('token', res.data.token);  // ✅ Save token to localStorage
-      setToken(res.data.token);                       // ✅ Update context to show logout
+      localStorage.setItem('token', res.data.token); 
+      localStorage.setItem("role", res.data.role); // ✅ Save token to localStorage
+      setToken({ token: res.data.token, 
+        role: res.data.role});                       // ✅ Update context to show logout
 
       toast.success('Login successful!', {
         position: "top-right",

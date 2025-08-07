@@ -14,6 +14,10 @@ import AddProduct  from "../Pages/AddProductModal.jsx"
 // import ProtectedRoute from "../component/ProtectedRoute.jsx";
 import ProtectedRoute from "./component/ProtectedRoute";
 
+import ThankYou from '../Pages/ThankYou.jsx';
+import AddressForm from '../Pages/AddressForm.jsx';
+import PaymentPage from './PaymentPage.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -51,6 +55,23 @@ const router = createBrowserRouter([
       {
         path: "/addproduct",
         element: <AddProduct />,
+      },
+
+
+      {
+        path: "/addressForm",
+        element: <AddressForm />,
+      },
+
+      {
+        path: "/paymentPage",
+        element: <PaymentPage />,
+      },
+
+
+      {
+        path: "/ThankYou",
+        element: <ThankYou />,
       },
 
       {

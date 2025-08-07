@@ -8,6 +8,10 @@ import cookieParser from "cookie-parser"
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./server/Server.js";
 
+import orderRoutes from "./routes/orderRoute.js";
+
+
+
 import "dotenv/config";
 
 dotenv.config();
@@ -31,6 +35,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec) )
 app.use("/product",productRoute );
 app.use("/user",UserRoute );
 // app.use("/uploads", express.static("uploads"));
+
+app.use("/order", orderRoutes);
+// app.use("/address", addressRoutes);
 
 
 connectDB();

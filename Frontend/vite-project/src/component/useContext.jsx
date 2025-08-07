@@ -164,13 +164,142 @@
 
 
 
+// import React, { createContext, useState, useEffect } from 'react';
+// import Instance from '../Axios.js';
+
+// export const UserContext = createContext();
+
+// export const UserContextProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);             // Stores user {_id, role, ...}
+//   const [token, setToken] = useState(localStorage.getItem("token"));
+//   const [wishlist, setWishlist] = useState([]);       // Full wishlist array
+//   const [wishlistIds, setWishlistIds] = useState([]); // Just product._id array
+//   const [cart, setCart] = useState([]);               // Full cart array
+//   const [cartCount, setCartCount] = useState(0);      // Optional: cart item count
+//   const [loading, setLoading] = useState(true);       // Global loading state
+//   const [products, setProducts] = useState([]);
+
+//   // ✅ Auto-fetch everything (user + cart + wishlist) if token is available
+//   useEffect(() => {
+//       fetchData()
+//       fetchProduct()
+//   }, []);
+
+
+//   const fetchProduct = async () => {
+//     try {
+//       const response = await Instance.get("/product/all"); 
+//       setProducts(response.data);
+//       console.log(response.data);
+//     } catch (error) {
+//       console.error("Error fetching products:", error);
+//     }
+//   };
+  
+
+
+
+//   const fetchData = async () => {
+//     try {
+//       // ✅ 1. Check User Token
+//       const userRes = await Instance.get("/user/checkToken", {
+//         withCredentials: true
+//       });
+
+//       const userData = userRes.data?.User;
+//       console.log(userData)
+//      setUser(userData)
+
+//       // ✅ 2. Fetch Wishlist
+//       const wishlistRes = await Instance.get("/product/wishlist/Data", {
+//         withCredentials: true,
+//       });
+//       if (wishlistRes.data?.wishlist) {
+//         const cleanedWishlist = wishlistRes.data.wishlist.filter((item) => item?.product);
+//         setWishlist(cleanedWishlist);
+//         setWishlistIds(cleanedWishlist.map((item) => item.product._id));
+//       }
+
+//       // ✅ 3. Fetch Cart
+//       const cartRes = await Instance.get("/product/cart/data", {
+//         withCredentials: true,
+//       });
+//       if (cartRes.data?.cart) {
+//         const cleanedCart = cartRes.data.cart.filter((item) => item?.product);
+//         setCart(cleanedCart);
+//         setCartCount(cleanedCart.length);
+//       }
+//     } catch (e) {
+//       console.error("Context data fetch error:", e);
+//       setUser(null);
+//       setWishlist([]);
+//       setWishlistIds([]);
+//       setCart([]);
+//       setCartCount(0);
+//       localStorage.removeItem("token");
+//       setToken(null);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // ✅ Add to Cart function
+//   // const handleAddToCart = async (product) => {
+//   //   try {
+//   //     const res = await Instance.post(
+//   //       `/product/cart/${product._id}`,
+//   //       {},
+//   //       { withCredentials: true }
+//   //     );
+//   //     console.log("Cart updated:", res.data);
+//   //   } catch (error) {
+//   //     console.error("Failed to add to cart:", error.response?.data || error.message);
+//   //   }
+//   // };
+
+//   return (
+//     <UserContext.Provider
+//       value={{
+//         user,
+//         setUser,
+//         token,
+//         setToken,
+//         cart,
+//         setCart,
+//         cartCount,
+//         setCartCount,
+//         wishlist,
+//         setWishlist,
+//         wishlistIds,
+//         setWishlistIds,
+//         // handleAddToCart,
+//         fetchData,
+//         products,
+//         loading
+//       }}
+//     >
+//       {children}
+//     </UserContext.Provider>
+//   );
+// };
+
+
+
+
+
+
+
+
 import React, { createContext, useState, useEffect } from 'react';
 import Instance from '../Axios.js';
 
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null);             // Stores user {_id, role, ...}
+const [user, setUser] = useState({
+  token: localStorage.getItem("token"),
+  role: localStorage.getItem("role"), // <- Save role also
+});           // Stores user {_id, role, ...}
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [wishlist, setWishlist] = useState([]);       // Full wishlist array
   const [wishlistIds, setWishlistIds] = useState([]); // Just product._id array
@@ -179,25 +308,23 @@ export const UserContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);       // Global loading state
   const [products, setProducts] = useState([]);
 
+  
+
   // ✅ Auto-fetch everything (user + cart + wishlist) if token is available
   useEffect(() => {
-      fetchData()
-      fetchProduct()
+    fetchData();
+    fetchProduct();
   }, []);
-
 
   const fetchProduct = async () => {
     try {
-      const response = await Instance.get("/product/all"); 
+      const response = await Instance.get("/product/all");
       setProducts(response.data);
       console.log(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
-  
-
-
 
   const fetchData = async () => {
     try {
@@ -207,8 +334,15 @@ export const UserContextProvider = ({ children }) => {
       });
 
       const userData = userRes.data?.User;
-      console.log(userData)
-     setUser(userData)
+      console.log(userData);
+
+      // ✅ Add role if exists
+      if (userData) {
+        setUser({
+          ...userData,
+          role: userData.role || "user" // fallback role if not defined
+        });
+      }
 
       // ✅ 2. Fetch Wishlist
       const wishlistRes = await Instance.get("/product/wishlist/Data", {
@@ -243,20 +377,6 @@ export const UserContextProvider = ({ children }) => {
     }
   };
 
-  // ✅ Add to Cart function
-  // const handleAddToCart = async (product) => {
-  //   try {
-  //     const res = await Instance.post(
-  //       `/product/cart/${product._id}`,
-  //       {},
-  //       { withCredentials: true }
-  //     );
-  //     console.log("Cart updated:", res.data);
-  //   } catch (error) {
-  //     console.error("Failed to add to cart:", error.response?.data || error.message);
-  //   }
-  // };
-
   return (
     <UserContext.Provider
       value={{
@@ -272,7 +392,6 @@ export const UserContextProvider = ({ children }) => {
         setWishlist,
         wishlistIds,
         setWishlistIds,
-        // handleAddToCart,
         fetchData,
         products,
         loading
