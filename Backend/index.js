@@ -12,7 +12,7 @@ import orderRoutes from "./routes/orderRoute.js";
 //  import { paymentHandler } from "./controllers/paymentHandler.js";
 
 import "dotenv/config";
-import paymentRoutes from "./routes/paymentRoutes.js";
+// import paymentRoutes from "./routes/paymentRoutes.js";
 
 
 dotenv.config();
@@ -27,7 +27,7 @@ const allowedOrigins = [
   process.env.DEPLOYED_FRONTEND_URL,
   process.env.LOCAL_URL,
   "http://localhost:5173", // Vite default port
-  "http://127.0.0.1:5500"  // Agar file local server pe chal rahi ho
+  "http://127.0.0.1:5500/"  // Agar file local server pe chal rahi ho
 ];
 
 const localhostRegex = /^(https:\/\/localhost:\d+|http:\/\/localhost:\d+)$/;
@@ -56,7 +56,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/product", productRoute);
 app.use("/user", UserRoute);
 app.use("/order", orderRoutes);
-app.use("/create", paymentRoutes);
+// app.use("/create", paymentRoutes);
 
 
 

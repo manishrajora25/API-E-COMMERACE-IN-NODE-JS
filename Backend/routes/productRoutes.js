@@ -2,7 +2,7 @@ import express from "express";
 import { createForm, cartForm, wishlistForm, getAllProducts, updateProduct, getSingleProducts, getCartData, removeFromCart, wishlistData, removeFromWishlist, deleteProduct } from "../controllers/productController.js";
 import {checkAdmin} from "../middleware/checkToken.js"
 import { uploadCloud } from "../middleware/cloudinaryUpload.js";
-import paymentRoutes from "./paymentRoutes.js";
+// import paymentRoutes from "./paymentRoutes.js";
 
 const router = express.Router();
 
