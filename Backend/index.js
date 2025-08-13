@@ -1,57 +1,3 @@
-// import express from "express";
-// import cors from "cors";
-// import dotenv from "dotenv";
-// import connectDB from "./config/db.js";
-// import productRoute from "./routes/productRoutes.js";
-// import UserRoute from "./routes/userRoute.js";
-// import cookieParser from "cookie-parser"
-// import swaggerUi from "swagger-ui-express";
-// import swaggerSpec from "./server/Server.js";
-
-// import orderRoutes from "./routes/orderRoute.js";
-
-// import "dotenv/config";
-
-// dotenv.config();
-
-// const app = express();
-// const port = process.env.PORT;
-
-
-// app.use(
-//   cors({
-//     origin: process.env.FRONTEND_URL,
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
-
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true })); 
-// app.use(cookieParser());
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec) )
-
-// app.use("/product",productRoute );
-// app.use("/user",UserRoute );
-// // app.use("/uploads", express.static("uploads"));
-
-// app.use("/order", orderRoutes);
-// // app.use("/address", addressRoutes);
-
-
-// connectDB();
-// app.listen(port, () => {
-//   console.log(`Server running at port ${port}`);
-// });
-
-
-
-
-
-
-
-
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -63,8 +9,11 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./server/Server.js";
 import orderRoutes from "./routes/orderRoute.js";
 // import addressRoutes from "./routes/addressRoute.js"; // Uncomment when ready
+//  import { paymentHandler } from "./controllers/paymentHandler.js";
 
 import "dotenv/config";
+import paymentRoutes from "./routes/paymentRoutes.js";
+
 
 dotenv.config();
 
@@ -72,7 +21,14 @@ const app = express();
 const port = process.env.PORT;
 
 
-const allowedOrigins = [process.env.DEPLOYED_FRONTEND_URL];
+// const allowedOrigins = [process.env.DEPLOYED_FRONTEND_URL];
+
+const allowedOrigins = [
+  process.env.DEPLOYED_FRONTEND_URL,
+  process.env.LOCAL_URL,
+  "http://localhost:5173", // Vite default port
+  "http://127.0.0.1:5500"  // Agar file local server pe chal rahi ho
+];
 
 const localhostRegex = /^(https:\/\/localhost:\d+|http:\/\/localhost:\d+)$/;
 
@@ -100,6 +56,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/product", productRoute);
 app.use("/user", UserRoute);
 app.use("/order", orderRoutes);
+app.use("/create", paymentRoutes);
+
+
+
+
+
 // app.use("/address", addressRoutes); // Uncomment when route is created
 
 // Connect DB and start server

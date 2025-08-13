@@ -427,6 +427,9 @@ import Footer from "../component/Footer.jsx";
 import { toast } from "react-toastify";
 import { UserContext } from "../component/useContext.jsx";
 
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
 const SingleProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -436,6 +439,8 @@ const SingleProduct = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // const stripePromise = loadStripe("pk_test_xxxxxxxxxxxxxxxxxx"); 
 
   useEffect(() => {
     Instance.get(`/product/${id}`)
@@ -512,6 +517,53 @@ const SingleProduct = () => {
       toast.error("Failed to place order");
     }
   };
+
+
+  // const handleBuyNow = async () => {
+  //   if (!user) {
+  //     return navigate(`/login?refere=${encodeURIComponent(location.pathname)}`);
+  //   }
+  
+  //   try {
+  //     // 1️⃣ Backend से clientSecret लो
+  //     const { data } = await Instance.post(
+  //       "/create/payment",
+  //       { amount: product.originalPrice * 100 }, // रुपये से पैसे में convert
+  //       { withCredentials: true }
+  //     );
+  
+  //     const stripe = await stripePromise;
+  
+  //     // 2️⃣ Payment Confirm करो
+  //     const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+  //       payment_method: {
+  //         card: elements.getElement(CardElement), // CardElement से details
+  //       },
+  //     });
+  
+  //     if (error) {
+  //       toast.error(error.message);
+  //       return;
+  //     }
+  
+  //     if (paymentIntent.status === "succeeded") {
+  //       // 3️⃣ Payment success होने के बाद order create
+  //       await Instance.post(
+  //         "/order/buynow",
+  //         { productId: id, quantity: 1 },
+  //         { withCredentials: true }
+  //       );
+  
+  //       toast.success("✅ Payment successful & order placed!");
+  //       navigate("/addressForm", {
+  //         state: { product, productId: product._id, quantity: 1 }
+  //       });
+  //     }
+  //   } catch (err) {
+  //     toast.error("Payment failed: " + err.message);
+  //   }
+  // };
+
 
   const handleDeleteProduct = async () => {
     try {

@@ -2,6 +2,7 @@ import express from "express";
 import { createForm, cartForm, wishlistForm, getAllProducts, updateProduct, getSingleProducts, getCartData, removeFromCart, wishlistData, removeFromWishlist, deleteProduct } from "../controllers/productController.js";
 import {checkAdmin} from "../middleware/checkToken.js"
 import { uploadCloud } from "../middleware/cloudinaryUpload.js";
+import paymentRoutes from "./paymentRoutes.js";
 
 const router = express.Router();
 
@@ -410,5 +411,7 @@ router.delete("/wishlist/:id", checkAdmin, removeFromWishlist )
 
 router.delete("/:id", checkAdmin, deleteProduct);
 
+// router.post("/payment",paymentRoutes )
 
-export default router;  
+
+export default router;   
