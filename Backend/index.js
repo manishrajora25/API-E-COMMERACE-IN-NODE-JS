@@ -23,12 +23,20 @@ const port = process.env.PORT;
 
 // const allowedOrigins = [process.env.DEPLOYED_FRONTEND_URL];
 
+// const allowedOrigins = [
+//   process.env.DEPLOYED_FRONTEND_URL,
+//   process.env.LOCAL_URL,
+//   "http://localhost:5173", // Vite default port
+//   "http://127.0.0.1:5500/"  // Agar file local server pe chal rahi ho
+// ];
+
 const allowedOrigins = [
   process.env.DEPLOYED_FRONTEND_URL,
   process.env.LOCAL_URL,
-  "http://localhost:5173", // Vite default port
-  "http://127.0.0.1:5500/"  // Agar file local server pe chal rahi ho
+  "http://localhost:5173", // Vite default
+  "http://127.0.0.1:5500" // Live Server
 ];
+
 
 const localhostRegex = /^(https:\/\/localhost:\d+|http:\/\/localhost:\d+)$/;
 
