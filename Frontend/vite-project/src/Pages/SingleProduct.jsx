@@ -491,32 +491,32 @@ const SingleProduct = () => {
     }
   };
 
-  const handleBuyNow = async () => {
-    if (!user) {
-      return navigate(`/login?refere=${encodeURIComponent(location.pathname)}`);
-    }
+  // const handleBuyNow = async () => {
+  //   if (!user) {
+  //     return navigate(`/login?refere=${encodeURIComponent(location.pathname)}`);
+  //   }
 
-    try {
-      await Instance.post(
-        "/order/buynow",
-        { productId: id, quantity: 1 },
-        { withCredentials: true }
-      );
-      toast.success("Order placed successfully!");
-      // navigate("/addressForm",  { state: { product } }, {
-      //   state: { productId: product._id, quantity: 1 }
-      // });
-      navigate("/addressForm", {
-        state: {
-          product,
-          productId: product._id,
-          quantity: 1,
-        }
-      });
-    } catch (err) {
-      toast.error("Failed to place order");
-    }
-  };
+  //   try {
+  //     await Instance.post(
+  //       "/order/buynow",
+  //       { productId: id, quantity: 1 },
+  //       { withCredentials: true }
+  //     );
+  //     toast.success("Order placed successfully!");
+  //     // navigate("/addressForm",  { state: { product } }, {
+  //     //   state: { productId: product._id, quantity: 1 }
+  //     // });
+  //     navigate("/addressForm", {
+  //       state: {
+  //         product,
+  //         productId: product._id,
+  //         quantity: 1,
+  //       }
+  //     });
+  //   } catch (err) {
+  //     toast.error("Failed to place order");
+  //   }
+  // };
 
 
   // const handleBuyNow = async () => {
@@ -565,9 +565,15 @@ const SingleProduct = () => {
   // };
 
 
+  const handleBuyNow = () => {
+    navigate("/addressForm", { state: { product } });
+    
+  };
+
+
   const handleDeleteProduct = async () => {
     try {
-      await Instance.delete(`/product/${product._id}`, {
+      await Instance.delete(`/product/${product._id}`, {  
         withCredentials: true
       });
       toast.success("Product deleted successfully!");

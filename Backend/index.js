@@ -12,7 +12,7 @@ import orderRoutes from "./routes/orderRoute.js";
 //  import { paymentHandler } from "./controllers/paymentHandler.js";
 
 import "dotenv/config";
-// import paymentRoutes from "./routes/paymentRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 
 
 dotenv.config();
@@ -64,7 +64,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/product", productRoute);
 app.use("/user", UserRoute);
 app.use("/order", orderRoutes);
-// app.use("/create", paymentRoutes);
+app.use("/create", paymentRoutes);
 
 
 
