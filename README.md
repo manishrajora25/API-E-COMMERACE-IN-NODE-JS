@@ -69,11 +69,11 @@ Stripe Sandbox Payment
 
 🔹 Wislist Routes
 
-- POST /api/Wislist → Add to cart
+- POST /api/wishlist → Add to cart
 
-- GET /api/Wislist → Get user cart
+- GET /api/wishlist → Get user cart
 
-- DELETE /api/Wislist/:id → Remove item from cart
+- DELETE /api/wishlist/:id → Remove item from cart
 
 
 🔹 Order Routes
