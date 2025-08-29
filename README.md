@@ -41,43 +41,54 @@ Stripe Sandbox Payment
 🛠️ Backend Routes
 🔹 Auth Routes
 
-POST /api/auth/register → Register user with OTP
+- POST /api/auth/register → Register user with OTP
 
-POST /api/auth/login → Login user
+- POST /api/auth/login → Login user
 
-POST /api/auth/verify-otp → Verify OTP
+- POST /api/auth/verify-otp → Verify OTP
 
 🔹 Product Routes
 
-GET /api/products → Get all products
+- GET /api/products → Get all products
 
-GET /api/products/:id → Get product by ID
+- GET /api/products/:id → Get product by ID
 
-POST /api/products → Add product (Admin only)
+- POST /api/products → Add product (Admin only)
 
-PUT /api/products/:id → Update product (Admin only)
+- PUT /api/products/:id → Update product (Admin only)
 
-DELETE /api/products/:id → Delete product (Admin only)
+- DELETE /api/products/:id → Delete product (Admin only)
 
 🔹 Cart Routes
 
-POST /api/cart → Add to cart
+- POST /api/cart → Add to cart
 
-GET /api/cart → Get user cart
+- GET /api/cart → Get user cart
 
-DELETE /api/cart/:id → Remove item from cart
+- DELETE /api/cart/:id → Remove item from cart
+
+🔹 Wislist Routes
+
+- POST /api/Wislist → Add to cart
+
+- GET /api/Wislist → Get user cart
+
+- DELETE /api/Wislist/:id → Remove item from cart
+
 
 🔹 Order Routes
 
-POST /api/orders → Place new order
+- POST /api/orders → Place new order
 
-GET /api/orders → Get user orders
+- GET /api/orders → Get user orders
 
-GET /api/orders/admin → Get all orders (Admin only)
+- GET /api/orders/admin → Get all orders (Admin only)
+
 
 🔹 Payment Routes (Stripe)
 
-POST /api/payment/create-checkout-session → Create Stripe checkout session
+- POST /api/payment/create-checkout-session → Create Stripe checkout session
+
 
 🖼️ Cloudinary Integration
 
