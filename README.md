@@ -1,5 +1,8 @@
 # 🛒 E-Commerce Project
 
+- Fontend url https://api-e-commerace-in-node-js-1.onrender.com
+- Backend Url https://api-e-commerace-in-node-js.onrender.com
+
 This is a full-stack **E-Commerce Web Application** built with:
 - **Frontend:** React + Vite + Tailwind CSS  
 - **Backend:** Node.js + Express + MongoDB  
