@@ -10,14 +10,14 @@ Backend URL: https://api-e-commerace-in-node-js.onrender.com
 
 Frontend: ⚛️ React + ⚡ Vite + 🎨 Tailwind CSS
 Backend: 🟢 Node.js + 🚀 Express + 🍃 MongoDB
-Authentication: 🔑 JWT + 📧 SendGrid (OTP Verification)
+Authentication: 🔑 JWT 
 Media Handling: 🖼️ Cloudinary (Image Uploads)
 Payments: 💳 Stripe Sandbox
 Middleware: 🧩 Custom Authentication & Error Handling
 
 🚀 Features
 
-✅ User signup & login with email OTP verification
+✅ User signup & login with email  verification
 ✅ Product listing, details, and categories
 ✅ Add to Cart, Wishlist, and Checkout
 ✅ Order management system
