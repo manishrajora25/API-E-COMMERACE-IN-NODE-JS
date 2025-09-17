@@ -33,10 +33,10 @@ const port = process.env.PORT;
 const allowedOrigins = [
   process.env.DEPLOYED_FRONTEND_URL,
   process.env.LOCAL_URL,
-  process.env.VERCEL_UR,
+  process.env.VERCEL_URL,
   "http://localhost:5173", // Vite default
   "http://127.0.0.1:5500",
-  "https://e-commerce-hvh7.vercel.app/"// Live Server
+  "https://e-commerce-tau-beige-19.vercel.app/",// Live Server
 ];
 
 
