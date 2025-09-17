@@ -34,9 +34,11 @@ const allowedOrigins = [
   process.env.DEPLOYED_FRONTEND_URL,
   process.env.LOCAL_URL,
   process.env.VERCEL_URL,
+  process.env.LOCAL_URLS,
   "http://localhost:5173", // Vite default
   "http://127.0.0.1:5500",
-  "https://e-commerce-tau-beige-19.vercel.app/",// Live Server
+  "http://127.0.0.1:5501",
+  "https://e-commerce-tau-beige-19.vercel.app/"// Live Server
 ];
 
 
