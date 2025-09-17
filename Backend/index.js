@@ -33,8 +33,10 @@ const port = process.env.PORT;
 const allowedOrigins = [
   process.env.DEPLOYED_FRONTEND_URL,
   process.env.LOCAL_URL,
+  process.env.VARCE_URL,
   "http://localhost:5173", // Vite default
-  "http://127.0.0.1:5500" // Live Server
+  "http://127.0.0.1:5500",
+  "https://e-commerce-hvh7.vercel.app/"// Live Server
 ];
 
 
@@ -60,7 +62,7 @@ app.use(cookieParser());
 // Swagger setup
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Routes
+
 app.use("/product", productRoute);
 app.use("/user", UserRoute);
 app.use("/order", orderRoutes);
